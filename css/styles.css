@@ -80,7 +80,7 @@ section {
 
 .navbar__menu .menu__link {
     display: block;
-    padding: 1em;
+    padding: .7em;
     font-weight: bold;
     text-decoration: none;
     color: #000;
@@ -125,6 +125,9 @@ section {
     .landing__container {
         max-width: 50em;
         padding: 4em;
+    }
+    .navbar__menu .menu__link{
+        padding: 1em;
     }
 }
 
