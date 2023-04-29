@@ -45,16 +45,19 @@ const isInViewport = (element) => {
 // build the nav
 const buildNavigationMenu = () => {
   const listContainer = document.querySelector('#navbar__list');
-  console.log(listContainer);
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < sections.length; ++i) {
     const item = document.createElement('li');
     const link = document.createElement('a');
     link.classList = 'menu__link';
     link.href = `#${sections[i].id}`;
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', function (e) {
       const activeSection = document.querySelector('.your-active-class');
-      if (activeSection.isSameNode(section)) return;
+      const activeLink = document.querySelector('a.active');
+      if (activeSection.isSameNode(sections[i])) return;
+      if (activeLink) activeLink.classList.remove('active');
+      console.log(this);
+      this.classList.add('active');
       activeSection.classList.remove('your-active-class');
       sections[i].classList.add('your-active-class');
     });
@@ -80,8 +83,13 @@ document.addEventListener('scroll', () => {
   sections.forEach((section) => {
     if (isInViewport(section)) {
       const activeSection = document.querySelector('.your-active-class');
-      if (activeSection.isSameNode(section)) return;
+      const oldActiveLink = document.querySelector('a.active');
+      if (oldActiveLink) oldActiveLink.classList.remove('active');
+      const newActiveLink = document.querySelector(`a[href='#${section.id}']`);
+      console.log(newActiveLink);
+      newActiveLink.classList.add('active');
       activeSection.classList.remove('your-active-class');
+      if (activeSection.isSameNode(section)) return;
       section.classList.add('your-active-class');
     }
   });
